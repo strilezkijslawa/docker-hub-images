@@ -62,7 +62,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 WORKDIR /www
 
 COPY ./php.ini /usr/local/etc/php/php.ini
-COPY ./imagemagick/policy.xml /etc/ImageMagick-6/policy.xml
+COPY ./imagemagick/policy.xml /etc/ImageMagick-7/policy.xml
 
 RUN ! php -m 2>&1 | grep -iE 'warning|error'
 
