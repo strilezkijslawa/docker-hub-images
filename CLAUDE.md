@@ -27,6 +27,7 @@ Directories for different PHP versions are near-identical copies. The intended d
 - the `FROM php:8.X-fpm-alpine` line in the base image,
 - the parent tag in ldap/oci images,
 - `ARG OCI8_VERSION` in the oci image (8.2 → 3.2.1, 8.3 → 3.3.0, 8.4 and 8.5 → 3.4.1; oci8 versions are tied to PHP versions).
+- `date.timezone` in `php.ini`: 8.5 uses `Europe/Kyiv`; 8.2–8.4 intentionally keep the deprecated `Europe/Kiev`.
 
 When changing extensions, packages, `php.ini`, or `policy.xml`, apply the change to every version's directory unless it is intentionally version-specific, and keep them otherwise identical (`diff` between versions should show only the lines above).
 

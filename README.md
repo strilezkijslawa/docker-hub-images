@@ -42,40 +42,63 @@ LDAP- та OCI-образи збираються `FROM ...:latest` батькі�
 2. Базовий образ збирати з `--pull`, щоб підтягнути свіжий `php:8.X-fpm-alpine`.
 3. **Не** використовувати `--pull` для ldap та oci: інакше Docker завантажить старий батьківський образ із Docker Hub замість щойно зібраного локально.
 
-### Одна версія (приклад для 8.4)
+### PHP 8.2
+
+```bash
+docker build --pull -t strilezkijslawa/php8.2-alpine:latest      strilezkijslawa-php82-alpine-latest
+docker build        -t strilezkijslawa/php8.2-ldap-alpine:latest strilezkijslawa-php82-alpine-ldap-latest
+docker build        -t strilezkijslawa/php8.2-oci-alpine:latest  strilezkijslawa-php82-alpine-oci-latest
+```
+
+```bash
+docker push strilezkijslawa/php8.2-alpine:latest
+docker push strilezkijslawa/php8.2-ldap-alpine:latest
+docker push strilezkijslawa/php8.2-oci-alpine:latest
+```
+
+### PHP 8.3
+
+```bash
+docker build --pull -t strilezkijslawa/php8.3-alpine:latest      strilezkijslawa-php83-alpine-latest
+docker build        -t strilezkijslawa/php8.3-ldap-alpine:latest strilezkijslawa-php83-alpine-ldap-latest
+docker build        -t strilezkijslawa/php8.3-oci-alpine:latest  strilezkijslawa-php83-alpine-oci-latest
+```
+
+```bash
+docker push strilezkijslawa/php8.3-alpine:latest
+docker push strilezkijslawa/php8.3-ldap-alpine:latest
+docker push strilezkijslawa/php8.3-oci-alpine:latest
+```
+
+### PHP 8.4
 
 ```bash
 docker build --pull -t strilezkijslawa/php8.4-alpine:latest      strilezkijslawa-php84-alpine-stable
 docker build        -t strilezkijslawa/php8.4-ldap-alpine:latest strilezkijslawa-php84-alpine-ldap-stable
 docker build        -t strilezkijslawa/php8.4-oci-alpine:latest  strilezkijslawa-php84-alpine-oci-stable
+```
 
+```bash
 docker push strilezkijslawa/php8.4-alpine:latest
 docker push strilezkijslawa/php8.4-ldap-alpine:latest
 docker push strilezkijslawa/php8.4-oci-alpine:latest
 ```
 
-Щоб також оновити пакети Alpine, а не брати їх із кешу шарів, додайте `--no-cache` до команди збірки базового образу.
-
-### Усі версії
+### PHP 8.5
 
 ```bash
-set -e
-for v in 82:latest 83:latest 84:stable 85:latest; do
-  n=${v%%:*}; suffix=${v##*:}; ver="${n:0:1}.${n:1}"
-
-  docker build --pull -t strilezkijslawa/php$ver-alpine:latest      strilezkijslawa-php$n-alpine-$suffix
-  docker build        -t strilezkijslawa/php$ver-ldap-alpine:latest strilezkijslawa-php$n-alpine-ldap-$suffix
-  docker build        -t strilezkijslawa/php$ver-oci-alpine:latest  strilezkijslawa-php$n-alpine-oci-$suffix
-done
-
-for v in 8.2 8.3 8.4 8.5; do
-  for img in alpine ldap-alpine oci-alpine; do
-    docker push strilezkijslawa/php$v-$img:latest
-  done
-done
+docker build --pull -t strilezkijslawa/php8.5-alpine:latest      strilezkijslawa-php85-alpine-latest
+docker build        -t strilezkijslawa/php8.5-ldap-alpine:latest strilezkijslawa-php85-alpine-ldap-latest
+docker build        -t strilezkijslawa/php8.5-oci-alpine:latest  strilezkijslawa-php85-alpine-oci-latest
 ```
 
-Пуш виконується лише після того, як успішно зібралися всі образи. Для пушу потрібен `docker login`.
+```bash
+docker push strilezkijslawa/php8.5-alpine:latest
+docker push strilezkijslawa/php8.5-ldap-alpine:latest
+docker push strilezkijslawa/php8.5-oci-alpine:latest
+```
+
+Щоб також оновити пакети Alpine, а не брати їх із кешу шарів, додайте `--no-cache` до команди збірки базового образу. Для пушу потрібен `docker login`.
 
 ### Перевірка
 
