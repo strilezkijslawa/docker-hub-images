@@ -14,7 +14,7 @@ Every PHP version (8.2, 8.3, 8.4, 8.5) has three images that build on top of eac
 php:8.X-fpm-alpine
   └─ strilezkijslawa/php8.X-alpine        (dir: strilezkijslawa-php8X-alpine-{latest|stable})
        └─ strilezkijslawa/php8.X-ldap-alpine   (dir: ...-alpine-ldap-...)   adds ldap ext
-            └─ (oci image)                     (dir: ...-alpine-oci-...)    adds Oracle Instant Client + oci8
+            └─ strilezkijslawa/php8.X-oci-alpine    (dir: ...-alpine-oci-...)    adds Oracle Instant Client + oci8
 ```
 
 - The ldap and oci Dockerfiles `FROM` the **published** `:latest` tag of the parent image. Changes to a base image only reach derived images after the base is built, tagged, and pushed (or tagged locally with the exact same name) — build in order base → ldap → oci.
@@ -39,12 +39,15 @@ When changing extensions, packages, `php.ini`, or `policy.xml`, apply the change
 
 ## Building
 
-Run from the repo root, in dependency order (example for 8.4; the oci tag name is not defined anywhere in the repo, choose the one used on Docker Hub):
+Full rebuild/push instructions (single version and all versions) are in `README.md`. Key points:
+
+- Build in order base → ldap → oci; all images are tagged `:latest`.
+- Use `--pull` only for the base image. With `--pull` on ldap/oci, Docker fetches the old parent from Docker Hub instead of the freshly built local one.
 
 ```bash
-docker build -t strilezkijslawa/php8.4-alpine:latest      strilezkijslawa-php84-alpine-stable
-docker build -t strilezkijslawa/php8.4-ldap-alpine:latest strilezkijslawa-php84-alpine-ldap-stable
-docker build -t <oci-tag>                                 strilezkijslawa-php84-alpine-oci-stable
+docker build --pull -t strilezkijslawa/php8.4-alpine:latest      strilezkijslawa-php84-alpine-stable
+docker build        -t strilezkijslawa/php8.4-ldap-alpine:latest strilezkijslawa-php84-alpine-ldap-stable
+docker build        -t strilezkijslawa/php8.4-oci-alpine:latest  strilezkijslawa-php84-alpine-oci-stable
 ```
 
 Quick verification of a built image: `docker run --rm <tag> php -m`.
