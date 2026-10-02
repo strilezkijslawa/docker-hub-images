@@ -17,7 +17,7 @@ Dockerfiles для образів PHP-FPM на Alpine, що публікують
 
 ### Що всередині
 
-- **Базовий** (`php:8.X-fpm-alpine`): розширення intl, mbstring, curl, xml, zip, gd (freetype, jpeg), pdo_mysql, ftp, sockets, exif, bcmath, gmp, imagick, redis; Composer; утиліти оптимізації зображень (jpegoptim, optipng, pngquant, gifsicle); git, unzip, bash. Власний `php.ini` і політика ImageMagick (`imagemagick/policy.xml`). `WORKDIR /www`, php-fpm на порту 9000.
+- **Базовий** (`php:8.X-fpm-alpine`): розширення intl, mbstring, curl, xml, zip, gd (freetype, jpeg), pdo_mysql, mysqli, ftp, sockets, exif, bcmath, gmp, imagick, redis; Composer; утиліти оптимізації зображень (jpegoptim, optipng, pngquant, gifsicle); git, unzip, bash. Власний `php.ini` і політика ImageMagick (`imagemagick/policy.xml`). `WORKDIR /www`, php-fpm на порту 9000.
 - **LDAP**: базовий + розширення `ldap`.
 - **OCI**: LDAP + Oracle Instant Client 21.9 (завантажується з oracle.com під час збірки) + розширення `oci8`.
 

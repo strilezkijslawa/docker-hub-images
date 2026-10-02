@@ -47,6 +47,7 @@ RUN apk add --no-cache --virtual .build-deps \
         zip \
         gd \
         pdo_mysql \
+        mysqli \
         ftp \
         sockets \
         exif \
