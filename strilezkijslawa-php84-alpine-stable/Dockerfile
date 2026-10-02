@@ -12,12 +12,15 @@ RUN apk add --no-cache \
     pngquant \
     gifsicle \
     imagemagick \
+    imagemagick-webp \
     icu-libs \
     icu-data-full \
     libzip \
     gmp \
     libpng \
     libjpeg-turbo \
+    libwebp \
+    libwebp-tools \
     freetype \
     oniguruma \
     libxml2
@@ -32,6 +35,7 @@ RUN apk add --no-cache --virtual .build-deps \
         libzip-dev \
         libpng-dev \
         libjpeg-turbo-dev \
+        libwebp-dev \
         freetype-dev \
         imagemagick-dev \
         gmp-dev \
@@ -39,6 +43,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && docker-php-ext-configure gd \
         --with-freetype \
         --with-jpeg \
+        --with-webp \
     && docker-php-ext-install -j"$(nproc)" \
         intl \
         mbstring \
